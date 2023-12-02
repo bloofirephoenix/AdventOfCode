@@ -10,7 +10,6 @@ pub fn run() {
             id: 0,
             sets: vec![],
         };
-        // Game X: something num, something num; something num
         let game_split: Vec<_> = line.split(':').collect();
         game.id = (&game_split[0][5..]).parse().unwrap();
 
