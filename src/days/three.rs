@@ -24,6 +24,7 @@ pub fn run() {
                 continue;
             }
             // its a symbol!
+            let mut adjacent_numbers = Vec::<i32>::new();
             for xc in -1..=1 {
                 for yc in -1..=1 {
                     let x = x as i32 + xc;
@@ -38,9 +39,13 @@ pub fn run() {
                     }
 
                     if engine[y as usize][x as usize].is_numeric() && !digits.contains(&(x, y)) {
-                        result += get_value(x, y, &engine, &mut digits);
+                        adjacent_numbers.push(get_value(x, y, &engine, &mut digits));
                     }
                 }
+            }
+
+            if adjacent_numbers.len() == 2 {
+                result += adjacent_numbers[0] * adjacent_numbers[1];
             }
         }
     }
