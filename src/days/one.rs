@@ -1,49 +1,58 @@
-use fancy_regex::Regex;
+use std::collections::HashMap;
 
-use super::read_input;
+use super::{read_input, Day};
 
-pub fn run() {
-    let input = read_input(1);
-    let regex = Regex::new(r"(?=(one)|(two)|(three)|(four)|(five)|(six)|(seven)|(eight)|(nine)|([1-9]))").unwrap();
+pub struct DayOne;
+impl Day for DayOne {
+    fn part1(self) {
+        let mut left: Vec<i32> = Vec::new();
+        let mut right: Vec<i32> = Vec::new();
 
-    let mut number: i32 = 0;
-    
-    for line in input.lines() {
-        let mut numbers = Vec::<i32>::new();
-        for capture in regex.captures_iter(line) {
-            if let Ok(capture) = capture {
-                for c in capture.iter() {
-                    if let Some(c) = c {
-                        let num = &line.to_string()[c.range()];
-                        if num.is_empty() {
-                            continue;
-                        }
-                        numbers.push(string_to_num(num));
-                    }
-                }
+        let input = read_input(1);
+        for line in input.lines() {
+            let line: Vec<&str> = line.split("   ").collect();
+            let l = i32::from_str_radix(line[0], 10).unwrap();
+            let r = i32::from_str_radix(line[1], 10).unwrap();
+            left.push(l);
+            right.push(r);
+        }
+
+        left.sort();
+        right.sort();
+
+        let mut distance = 0;
+        for i in 0..left.len() {
+            distance += (left[i] - right[i]).abs()
+        }
+
+        println!("ANSWER: {distance}")
+    }
+
+    fn part2(self) {
+        let mut left: Vec<i32> = Vec::new();
+        let mut right: HashMap<i32, i32> = HashMap::new();
+
+        let input = read_input(1);
+        for line in input.lines() {
+            let line: Vec<&str> = line.split("   ").collect();
+            let l = i32::from_str_radix(line[0], 10).unwrap();
+            let r = i32::from_str_radix(line[1], 10).unwrap();
+            left.push(l);
+
+            if right.contains_key(&r) {
+                right.insert(r, right[&r] + 1);
+            } else {
+                right.insert(r, 1);
             }
         }
 
-        let num = format!("{}{}", numbers.first().unwrap(), numbers.last().unwrap());
-        number += num.parse::<i32>().unwrap();
-    }
-
-    println!("Result: {}", number);
-}
-
-fn string_to_num(num: &str) -> i32 {
-    match num {
-        "one" => 1,
-        "two" => 2,
-        "three" => 3,
-        "four" => 4,
-        "five" => 5,
-        "six" => 6,
-        "seven" => 7,
-        "eight" => 8,
-        "nine" => 9,
-        _ => {
-            num.parse().unwrap()
+        let mut similarity = 0;
+        for v in left {
+            if right.contains_key(&v) {
+                similarity += v * right[&v];
+            }
         }
+
+        println!("ANSWER: {similarity}")
     }
 }
