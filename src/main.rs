@@ -1,6 +1,6 @@
 use std::env;
 
-use days::{five::DayFive, four::DayFour, one::DayOne, run_day, six::DaySix, three::DayThree, two::DayTwo};
+use days::{five::DayFive, four::DayFour, one::DayOne, run_day, seven::DaySeven, six::DaySix, three::DayThree, two::DayTwo};
 
 mod days;
 
@@ -25,6 +25,7 @@ fn main() {
         "4" => run_day(DayFour, part2),
         "5" => run_day(DayFive, part2),
         "6" => run_day(DaySix, part2),
+        "7" => run_day(DaySeven, part2),
         _ => {
             usage();
         },
