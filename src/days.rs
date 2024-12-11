@@ -9,6 +9,7 @@ pub mod six;
 pub mod seven;
 pub mod eight;
 pub mod nine;
+pub mod ten;
 
 pub fn read_input(day: i32) -> String {
     fs::read_to_string(format!("inputs/{}.txt", day))

@@ -1,8 +1,9 @@
 use std::env;
 
-use days::{eight::DayEight, five::DayFive, four::DayFour, nine::DayNine, one::DayOne, run_day, seven::DaySeven, six::DaySix, three::DayThree, two::DayTwo};
+use days::{eight::DayEight, five::DayFive, four::DayFour, nine::DayNine, one::DayOne, run_day, seven::DaySeven, six::DaySix, ten::DayTen, three::DayThree, two::DayTwo};
 
 mod days;
+mod grid;
 
 fn main() {
     let args: Vec<String> = env::args().collect();
@@ -28,6 +29,7 @@ fn main() {
         "7" => run_day(DaySeven, part2),
         "8" => run_day(DayEight, part2),
         "9" => run_day(DayNine, part2),
+        "10" => run_day(DayTen, part2),
         _ => {
             usage();
         },
