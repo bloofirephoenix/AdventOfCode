@@ -1,6 +1,6 @@
 use std::env;
 
-use days::{eight::DayEight, five::DayFive, four::DayFour, nine::DayNine, one::DayOne, run_day, seven::DaySeven, six::DaySix, ten::DayTen, three::DayThree, two::DayTwo};
+use days::{eight::DayEight, eleven::DayEleven, five::DayFive, four::DayFour, nine::DayNine, one::DayOne, run_day, seven::DaySeven, six::DaySix, ten::DayTen, three::DayThree, two::DayTwo};
 
 mod days;
 mod grid;
@@ -30,6 +30,7 @@ fn main() {
         "8" => run_day(DayEight, part2),
         "9" => run_day(DayNine, part2),
         "10" => run_day(DayTen, part2),
+        "11" => run_day(DayEleven, part2),
         _ => {
             usage();
         },
